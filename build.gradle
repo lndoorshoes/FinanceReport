@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+jar {
+    manifest {
+        attributes 'Title': 'FinanceReport', 'Main-Class': 'lndoor.Main'
+    }
+    from {
+        configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.26'
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.26'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
+
+//    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.14.2'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.14.2'
+    compile 'org.apache.poi:poi-ooxml:4.1.2'
+
+    compile 'com.fasterxml.jackson.core:jackson-core:2.14.2'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
