@@ -20,12 +20,6 @@ public class StockUtils {
 	public static final String LOW_KOSDAQ = "low52week/KOSDAQ/";
 	public static final String HOST = "https://m.stock.naver.com/api/stocks/";
 
-	// KOSPI 신고가: https://m.stock.naver.com/api/stocks/high52week/KOSPI?page=1
-	// KOSPI 신저가: https://m.stock.naver.com/api/stocks/low52week/KOSPI?page=1
-	// KOSDAQ 신고가: https://m.stock.naver.com/api/stocks/high52week/KOSDAQ?page=1
-	// KOSDAQ 신저: https://m.stock.naver.com/api/stocks/low52week/KOSDAQ?page=1
-
-
 	public static StockInfos setStockInfos(String type) throws IOException {
 		StockInfos result = new StockInfos();
 		int currentPage = 1;
@@ -81,6 +75,9 @@ public class StockUtils {
 			result.setStocks(Stream.concat(result.getStocks().stream(), subResult.getStocks().stream())
 							.collect(Collectors.toList()));
 		}
+
+		// Stock 아니면 제거
+		result.getStocks().removeIf(stock -> !stock.getStockEndType().equals("stock"));
 
 		return result;
 	}

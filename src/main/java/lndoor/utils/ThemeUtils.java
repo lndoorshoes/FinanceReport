@@ -17,9 +17,7 @@ public class ThemeUtils {
 	public static final String THEME = "theme";
 	public static final String HOST = "https://m.stock.naver.com/api/stocks/";
 
-	// 업종
-	// https://m.stock.naver.com/api/stocks/theme?page=1
-
+	// 테마
 
 	public static ThemeInfos setThemeInfos(String type) throws IOException {
 		ThemeInfos result = new ThemeInfos();

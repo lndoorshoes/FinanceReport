@@ -21,7 +21,7 @@ public class Main {
         // Head
         List<String[]> initialHighLowCSV = new ArrayList<>();
         String[] StockTopHeadline = {LocalDateTime.now().toString() + " 52주 신고가/신저가"};
-        String[] StockCatecoryType = {"KOSPI", "", "KOSDAQ"};
+        String[] StockCatecoryType = {"KOSPI", "", "KOSDAQ", ""};
         String[] StockSortType = {"신고가", "신저가", "신고가", "신저가"};
         initialHighLowCSV.add(StockTopHeadline);
         initialHighLowCSV.add(StockCatecoryType);
@@ -48,7 +48,6 @@ public class Main {
 
         // sheet 분리해서 제공하자
         // 업종
-        // https://m.stock.naver.com/api/stocks/industry?page=1
         List<String[]> initialIndustryCSV = new ArrayList<>();
         String[] industryTopHeadline = {LocalDateTime.now().toString() + " 업종별 현황"};
         String[] industryType = {"이름", "상승률"};

@@ -18,8 +18,6 @@ public class IndustryUtils {
 	public static final String HOST = "https://m.stock.naver.com/api/stocks/";
 
 	// 업종
-	// https://m.stock.naver.com/api/stocks/industry?page=1
-
 
 	public static IndustryInfos setIndustryInfos(String type) throws IOException {
 		IndustryInfos result = new IndustryInfos();
