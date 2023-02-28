@@ -1,8 +1,8 @@
 package lndoor.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lndoor.stock.StockInfos;
-import lndoor.stock.Stocks;
+import lndoor.info.StockInfo;
+import lndoor.info.Stocks;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,8 +20,8 @@ public class StockUtils {
 	public static final String LOW_KOSDAQ = "low52week/KOSDAQ/";
 	public static final String HOST = "https://m.stock.naver.com/api/stocks/";
 
-	public static StockInfos setStockInfos(String type) throws IOException {
-		StockInfos result = new StockInfos();
+	public static StockInfo setStockInfo(String type) throws IOException {
+		StockInfo result = new StockInfo();
 		int currentPage = 1;
 
 		URL url = new URL(HOST + type + "?page=" + currentPage);
@@ -48,7 +48,7 @@ public class StockUtils {
 		String responseCode = String.valueOf(conn.getResponseCode());
 
 		ObjectMapper mapper = new ObjectMapper();
-		result = mapper.readValue(responseBody, StockInfos.class);
+		result = mapper.readValue(responseBody, StockInfo.class);
 
 		int total = result.getTotalCount();
 		int pageSize = result.getPageSize();
@@ -70,7 +70,7 @@ public class StockUtils {
 			//메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
 			responseBody = sb.toString();
 
-			StockInfos subResult = mapper.readValue(responseBody, StockInfos.class);
+			StockInfo subResult = mapper.readValue(responseBody, StockInfo.class);
 			List<Stocks> mergeResult = result.getStocks();
 			result.setStocks(Stream.concat(result.getStocks().stream(), subResult.getStocks().stream())
 							.collect(Collectors.toList()));

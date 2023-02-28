@@ -1,8 +1,8 @@
 package lndoor;
 
-import lndoor.groups.IndustryInfos;
-import lndoor.stock.StockInfos;
-import lndoor.stock.ThemeInfos;
+import lndoor.info.IndustryInfo;
+import lndoor.info.StockInfo;
+import lndoor.info.ThemeInfo;
 import lndoor.utils.IndustryUtils;
 import lndoor.utils.PoiCSVUtils;
 import lndoor.utils.StockUtils;
@@ -28,18 +28,18 @@ public class Main {
         initialHighLowCSV.add(StockSortType);
 
         // Contents Input Setting
-        StockInfos kospiHigh52Week = StockUtils.setStockInfos(StockUtils.HIGH_KOSPI);
-        StockInfos kospiLow52Week = StockUtils.setStockInfos(StockUtils.LOW_KOSPI);
-        StockInfos kosdaqHigh52Week = StockUtils.setStockInfos(StockUtils.HIGH_KOSDAQ);
-        StockInfos kosdaqLow52Week = StockUtils.setStockInfos(StockUtils.LOW_KOSDAQ);
+        StockInfo kospiHigh52Week = StockUtils.setStockInfo(StockUtils.HIGH_KOSPI);
+        StockInfo kospiLow52Week = StockUtils.setStockInfo(StockUtils.LOW_KOSPI);
+        StockInfo kosdaqHigh52Week = StockUtils.setStockInfo(StockUtils.HIGH_KOSDAQ);
+        StockInfo kosdaqLow52Week = StockUtils.setStockInfo(StockUtils.LOW_KOSDAQ);
 
         // Contents
-        List<StockInfos> allStockInfos = new ArrayList<>();
-        allStockInfos.add(kospiHigh52Week);
-        allStockInfos.add(kospiLow52Week);
-        allStockInfos.add(kosdaqHigh52Week);
-        allStockInfos.add(kosdaqLow52Week);
-        List<String[]> contentsHighLowSheet = PoiCSVUtils.makeStockCSVContents(allStockInfos);
+        List<StockInfo> allStockInfo = new ArrayList<>();
+        allStockInfo.add(kospiHigh52Week);
+        allStockInfo.add(kospiLow52Week);
+        allStockInfo.add(kosdaqHigh52Week);
+        allStockInfo.add(kosdaqLow52Week);
+        List<String[]> contentsHighLowSheet = PoiCSVUtils.makeStockCSVContents(allStockInfo);
 
         List<String[]> highLowSheet = Stream.concat(initialHighLowCSV.stream(), contentsHighLowSheet.stream()).collect(Collectors.toList());
         List<List<String[]>> resultCSV = new ArrayList<>();
@@ -55,8 +55,8 @@ public class Main {
         initialIndustryCSV.add(industryType);
 
 
-        IndustryInfos industryInfos = IndustryUtils.setIndustryInfos(IndustryUtils.INDUSTRY);
-        List<String[]> contentsIndustryCSV = PoiCSVUtils.makeIndustryCSVContents(industryInfos);
+        IndustryInfo industryInfo = IndustryUtils.setIndustryInfo(IndustryUtils.INDUSTRY);
+        List<String[]> contentsIndustryCSV = PoiCSVUtils.makeIndustryCSVContents(industryInfo);
 
         List<String[]> industrySheet = Stream.concat(initialIndustryCSV.stream(), contentsIndustryCSV.stream()).collect(Collectors.toList());
 
@@ -75,9 +75,9 @@ public class Main {
         initialThemeCSV.add(themeTopHeadline);
         initialThemeCSV.add(themeType);
 
-        ThemeInfos themeInfos = ThemeUtils.setThemeInfos(ThemeUtils.THEME);
+        ThemeInfo themeInfo = ThemeUtils.setThemeInfo(ThemeUtils.THEME);
 
-        List<String[]> contentsThemeCSV = PoiCSVUtils.makeThemeCSVContents(themeInfos);
+        List<String[]> contentsThemeCSV = PoiCSVUtils.makeThemeCSVContents(themeInfo);
 
         List<String[]> themeSheet = Stream.concat(initialThemeCSV.stream(), contentsThemeCSV.stream()).collect(Collectors.toList());
 

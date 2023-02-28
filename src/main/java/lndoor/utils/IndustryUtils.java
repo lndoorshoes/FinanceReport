@@ -1,8 +1,8 @@
 package lndoor.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lndoor.groups.IndustryInfos;
-import lndoor.stock.Items;
+import lndoor.info.IndustryInfo;
+import lndoor.info.Items;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,8 +19,8 @@ public class IndustryUtils {
 
 	// 업종
 
-	public static IndustryInfos setIndustryInfos(String type) throws IOException {
-		IndustryInfos result = new IndustryInfos();
+	public static IndustryInfo setIndustryInfo(String type) throws IOException {
+		IndustryInfo result = new IndustryInfo();
 		int currentPage = 1;
 
 		URL url = new URL(HOST + type + "?page=" + currentPage);
@@ -47,7 +47,7 @@ public class IndustryUtils {
 		String responseCode = String.valueOf(conn.getResponseCode());
 
 		ObjectMapper mapper = new ObjectMapper();
-		result = mapper.readValue(responseBody, IndustryInfos.class);
+		result = mapper.readValue(responseBody, IndustryInfo.class);
 
 		int total = result.getTotalCount();
 		int pageSize = result.getPageSize();
@@ -69,7 +69,7 @@ public class IndustryUtils {
 			//메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
 			responseBody = sb.toString();
 
-			IndustryInfos subResult = mapper.readValue(responseBody, IndustryInfos.class);
+			IndustryInfo subResult = mapper.readValue(responseBody, IndustryInfo.class);
 			List<Items> mergeResult = result.getGroups();
 			result.setGroups(Stream.concat(result.getGroups().stream(), subResult.getGroups().stream())
 							.collect(Collectors.toList()));

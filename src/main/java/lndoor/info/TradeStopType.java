@@ -1,4 +1,4 @@
-package lndoor.stock;
+package lndoor.info;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CompareToPreviousPrice{
+public class TradeStopType {
 	private String code;
 	private String text;
 	private String name;

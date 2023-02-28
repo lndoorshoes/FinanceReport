@@ -1,10 +1,9 @@
 package lndoor.utils;
 
-import lndoor.groups.IndustryInfos;
-import lndoor.stock.Items;
-import lndoor.stock.StockInfos;
-import lndoor.stock.ThemeInfos;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import lndoor.info.IndustryInfo;
+import lndoor.info.Items;
+import lndoor.info.StockInfo;
+import lndoor.info.ThemeInfo;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -65,22 +64,22 @@ public class PoiCSVUtils {
 		}
 	}
 
-	public static List<String[]> makeStockCSVContents(List<StockInfos> allStockInfos) {
+	public static List<String[]> makeStockCSVContents(List<StockInfo> allStockInfo) {
 		List<String[]> result = new ArrayList<>();
 
 		int maxSize = 0;
-		int columnSize = allStockInfos.size();
-		for (int i = 0; i < allStockInfos.size(); i++) {
-			maxSize = Math.max(maxSize, allStockInfos.get(i).getTotalCount());
+		int columnSize = allStockInfo.size();
+		for (int i = 0; i < allStockInfo.size(); i++) {
+			maxSize = Math.max(maxSize, allStockInfo.get(i).getTotalCount());
 		}
 
 		for (int i = 0; i < maxSize; i++) {
 			String[] rowData = new String[columnSize];
-			for (int j = 0; j < allStockInfos.size(); j++) {
-				if (i >= allStockInfos.get(j).getStocks().size()) {
+			for (int j = 0; j < allStockInfo.size(); j++) {
+				if (i >= allStockInfo.get(j).getStocks().size()) {
 					rowData[j] = "";
 				} else {
-					rowData[j] = allStockInfos.get(j).getStocks().get(i).getStockName();
+					rowData[j] = allStockInfo.get(j).getStocks().get(i).getStockName();
 				}
 			}
 			result.add(rowData);
@@ -89,9 +88,9 @@ public class PoiCSVUtils {
 		return result;
 	}
 
-	public static List<String[]> makeIndustryCSVContents(IndustryInfos industryInfos) {
+	public static List<String[]> makeIndustryCSVContents(IndustryInfo industryInfo) {
 		List<String[]> result = new ArrayList<>();
-		List<Items> groups = industryInfos.getGroups();
+		List<Items> groups = industryInfo.getGroups();
 		int groupSize = groups.size();
 
 		for (int i = 0; i < groupSize; i++) {
@@ -104,9 +103,9 @@ public class PoiCSVUtils {
 		return result;
 	}
 
-	public static List<String[]> makeThemeCSVContents(ThemeInfos themeInfos) {
+	public static List<String[]> makeThemeCSVContents(ThemeInfo themeInfo) {
 		List<String[]> result = new ArrayList<>();
-		List<Items> groups = themeInfos.getGroups();
+		List<Items> groups = themeInfo.getGroups();
 		int groupSize = groups.size();
 
 		for (int i = 0; i < groupSize; i++) {

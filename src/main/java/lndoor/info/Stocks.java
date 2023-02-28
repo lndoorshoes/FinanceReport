@@ -1,4 +1,4 @@
-package lndoor.stock;
+package lndoor.info;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

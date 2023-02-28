@@ -1,8 +1,8 @@
 package lndoor.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lndoor.stock.Items;
-import lndoor.stock.ThemeInfos;
+import lndoor.info.ThemeInfo;
+import lndoor.info.Items;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,9 +18,8 @@ public class ThemeUtils {
 	public static final String HOST = "https://m.stock.naver.com/api/stocks/";
 
 	// 테마
-
-	public static ThemeInfos setThemeInfos(String type) throws IOException {
-		ThemeInfos result = new ThemeInfos();
+	public static ThemeInfo setThemeInfo(String type) throws IOException {
+		ThemeInfo result = new ThemeInfo();
 		int currentPage = 1;
 
 		URL url = new URL(HOST + type + "?page=" + currentPage);
@@ -47,7 +46,7 @@ public class ThemeUtils {
 		String responseCode = String.valueOf(conn.getResponseCode());
 
 		ObjectMapper mapper = new ObjectMapper();
-		result = mapper.readValue(responseBody, ThemeInfos.class);
+		result = mapper.readValue(responseBody, ThemeInfo.class);
 
 		int total = result.getTotalCount();
 		int pageSize = result.getPageSize();
@@ -69,7 +68,7 @@ public class ThemeUtils {
 			//메소드 호출 완료 시 반환하는 변수에 버퍼 데이터 삽입 실시
 			responseBody = sb.toString();
 
-			ThemeInfos subResult = mapper.readValue(responseBody, ThemeInfos.class);
+			ThemeInfo subResult = mapper.readValue(responseBody, ThemeInfo.class);
 			List<Items> mergeResult = result.getGroups();
 			result.setGroups(Stream.concat(result.getGroups().stream(), subResult.getGroups().stream())
 							.collect(Collectors.toList()));

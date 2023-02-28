@@ -1,20 +1,16 @@
-package lndoor.groups;
+package lndoor.info;
 
-import lndoor.stock.Items;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import lombok.experimental.SuperBuilder;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class IndustryInfos {
-	private String stockListSortType;
-	private List<Items> groups;
+@SuperBuilder
+public class Info {
+	String stockListSortType;
 	private int totalCount;
 	private int page;
 	private int pageSize;
